@@ -37,8 +37,32 @@ def main():
 	pl.xlabel("n [-]")
 	pl.ylabel("Time [s]")
 	pl.title("Python vs. Numba")
-	pl.savefig("test.png")
+	pl.legend(["Python","Numba"])
+	pl.savefig("pynu.png")
 
+	n=[x for x in range(30,46)]
+	time_py,time_nu,time_c=[],[],[]
+	persons=[Person(x) for x in n]
+	for ind, i in enumerate(n):
+		s=perf_counter()
+		fib_py(i)
+		e=perf_counter()
+		time_py.append(e-s)
+		s=perf_counter()
+		fib_numba(i)
+		e=perf_counter()
+		time_nu.append(e-s)
+		s=perf_counter()
+		persons[ind].fib()
+		e=perf_counter()
+		time_c.append(e-s)
+	pl.plot(n,time_py,'ro',n,time_nu,'bo',n,time_c,'co')
+	pl.xlabel("n [-]")
+	pl.ylabel("Time [s]")
+	pl.title("Python vs. Numba vs. C++")
+	pl.legend(["Python","Numba","C++"])
+	pl.savefig("pynuc.png")
+	
 	f=Person(1)
 	start=perf_counter()
 	fib_py(1)
