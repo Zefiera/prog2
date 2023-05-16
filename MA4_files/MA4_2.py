@@ -64,7 +64,6 @@ def main():
 		persons[ind].fib()
 		e=perf_counter()
 		time_c.append(e-s)
-	pl.plot(n,time_py,'ro',n,time_nu,'bo',n,time_c,'co')
 	pl.subplot(212)
 	line1,=pl.plot(n,time_py,'ro', label='Python')
 	line2,=pl.plot(n,time_nu,'bo',label='Numba')
